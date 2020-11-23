@@ -1,9 +1,12 @@
+# Build
+build
+
 # Node
 node_modules/
 package-lock.json
 
 # Conf
-config.js
+config.json
 !commands/config/config.js
 
 # Macos
@@ -18,7 +21,6 @@ config.js
 .todo
 
 # X
-
 migrate*
 tets*
 integrations*

@@ -1,17 +1,15 @@
-/*
-Logger class for easy and aesthetically pleasing console logging
-*/
-const { bgBlue, black, green } = require("chalk");
+import { bgBlue, black, green } from "chalk";
 
-function dateTimePad (value, digits){
+const dateTimePad = (value: number, digits: number) => {
     let number = value;
+    let output;
     while (number.toString().length < digits) {
-        number = "0" + number;
+        output = "0" + number;
     }
-    return number;
+    return output;
 }
 
-function format (tDate){
+const format = (tDate: Date) => {
     return (tDate.getFullYear() + "-" +
     dateTimePad((tDate.getMonth() + 1), 2) + "-" +
     dateTimePad(tDate.getDate(), 2) + " " +
@@ -21,11 +19,10 @@ function format (tDate){
     dateTimePad(tDate.getMilliseconds(), 3));
 }
 
-module.exports = class Logger {
-    static log (content, type = "log") {
+export default class Logger {
+    static log (content: string, type = "log") {
         const date = `[${format(new Date(Date.now()))}]:`;
         switch (type) {
-        // Check the message type and then print him in the console
         case "log": {
             return console.log(`${date} ${bgBlue(type.toUpperCase())} ${content} `);
         }

@@ -3,17 +3,18 @@ if (!process.argv.includes("--sharded")){
     process.exit(0);
 }
 
-const util = require("util"),
-    fs = require("fs"),
-    readdir = util.promisify(fs.readdir);
+import util from "util";
+import fs from "fs";
+const readdir = util.promisify(fs.readdir);
 
-const config = require("./config.js");
-const Sentry = require("@sentry/node");
+import config from "./config.json"
+import Sentry from "@sentry/node"
 Sentry.init({ dsn: config.sentryDSN });
 
 // Load ManageInvite class
-const ManageInvite = require("./structures/Client"),
-    client = new ManageInvite({
+import ManageInvite from "./structures/Client";
+
+const client = new ManageInvite({
         partials: [ "REACTION", "MESSAGE", "CHANNEL" ]
     });
 

@@ -1,14 +1,14 @@
-const i18next = require("i18next");
-const Backend = require("i18next-fs-backend");
-const path = require("path");
-const fs = require("fs").promises;
+import i18next from 'i18next';
+import Backend from 'i18next-fs-backend'
+import path from 'path';
+import { promises } from 'fs';
 
-async function walkDirectory (dir, namespaces = [], folderName = "") {
-    const files = await fs.readdir(dir);
+async function walkDirectory (dir: string, namespaces: string[] = [], folderName = "") {
+    const files = await promises.readdir(dir);
 
     const languages = [];
     for (const file of files) {
-        const stat = await fs.stat(path.join(dir, file));
+        const stat = await promises.stat(path.join(dir, file));
         if (stat.isDirectory()) {
             const isLanguage = file.includes("-");
             if (isLanguage) languages.push(file);
@@ -29,7 +29,7 @@ async function walkDirectory (dir, namespaces = [], folderName = "") {
     return { namespaces: [...new Set(namespaces)], languages };
 }
 
-module.exports = async () => {
+export default async () => {
     const { namespaces, languages } = await walkDirectory(
         path.resolve(__dirname, "../i18n/")
     );

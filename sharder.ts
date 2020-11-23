@@ -1,4 +1,4 @@
-const { ShardingManager } = require("discord.js");
+import { ShardingManager } from "discord.js"
 const manager = new ShardingManager("./index.js", {
     token: require("./config").token,
     totalShards: require("./config").shardCount,
